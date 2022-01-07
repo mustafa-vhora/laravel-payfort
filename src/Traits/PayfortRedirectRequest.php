@@ -18,12 +18,12 @@ trait PayfortRedirectRequest
     {
         # Prepare redirection page request parameters
         $requestParams = [
-            'service_command' => 'TOKENIZATION',
-            'access_code' => $this->config['access_code'],
+            'service_command'     => 'TOKENIZATION',
+            'access_code'         => $this->config['access_code'],
             'merchant_identifier' => $this->config['merchant_identifier'],
-            'merchant_reference' => $data['merchant_reference'],
-            'language' => $this->config['language'],
-            'return_url' => $this->config['return_url']
+            'merchant_reference'  => $data['merchant_reference'],
+            'language'            => $this->config['language'],
+            'return_url'          => !empty($data['return_url']) ? $data['return_url'] : $this->config['return_url']
         ];
 
         return $this->displayPayfortPage($requestParams);
@@ -41,15 +41,15 @@ trait PayfortRedirectRequest
     {
         # Prepare redirection page request parameters
         $requestParams = [
-            'command' => data_get($data, 'command', 'AUTHORIZATION'),
-            'access_code' => $this->config['access_code'],
+            'command'             => data_get($data, 'command', 'AUTHORIZATION'),
+            'access_code'         => $this->config['access_code'],
             'merchant_identifier' => $this->config['merchant_identifier'],
-            'merchant_reference' => $data['merchant_reference'],
-            'amount' => $this->getPayfortAmount($data['amount'], $data['currency']),
-            'currency' => data_get($data, 'currency', $this->config['currency']),
-            'language' => $this->config['language'],
-            'customer_email' => $data['customer_email'],
-            'return_url' => $this->config['return_url']
+            'merchant_reference'  => $data['merchant_reference'],
+            'amount'              => $this->getPayfortAmount($data['amount'], $data['currency']),
+            'currency'            => data_get($data, 'currency', $this->config['currency']),
+            'language'            => $this->config['language'],
+            'customer_email'      => $data['customer_email'],
+            'return_url'          => !empty($data['return_url']) ? $data['return_url'] : $this->config['return_url']
         ];
 
         # Redirection page request optional parameters
@@ -70,7 +70,7 @@ trait PayfortRedirectRequest
         # Check for request optional parameters in passed params
         foreach ($requestOptionalParameters as $optionalParameter) {
             if (array_key_exists($optionalParameter, $data)) {
-                $requestParams[$optionalParameter] = $data[$optionalParameter];
+                $requestParams[ $optionalParameter ] = $data[ $optionalParameter ];
             }
         }
 
