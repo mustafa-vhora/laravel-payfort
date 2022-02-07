@@ -26,6 +26,12 @@ trait PayfortRedirectRequest
             'return_url'          => !empty($data['return_url']) ? $data['return_url'] : $this->config['return_url']
         ];
 
+        if(!empty($data['debug']) && $data['debug']==1) {
+            echo "<pre>";
+            print_r($requestParams);
+            echo "</pre>";
+        }
+
         return $this->displayPayfortPage($requestParams);
     }
 
@@ -72,6 +78,12 @@ trait PayfortRedirectRequest
             if (array_key_exists($optionalParameter, $data)) {
                 $requestParams[ $optionalParameter ] = $data[ $optionalParameter ];
             }
+        }
+
+        if(!empty($data['debug']) && $data['debug']==1) {
+            echo "<pre>";
+            print_r($requestParams);
+            echo "</pre>";
         }
 
         return $this->displayPayfortPage($requestParams);
