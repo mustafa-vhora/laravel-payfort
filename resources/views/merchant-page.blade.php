@@ -12,7 +12,7 @@
 </form>
 <script>
     window.onload = function () {
-        document.frm.submit();
+        // document.frm.submit();
     };
 </script>
 </body>
